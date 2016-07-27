@@ -11,4 +11,16 @@ class PostsController < ApplicationController
 
   def edit
   end
+
+  def censor
+    @posts = Post.all
+    @posts.each do |post|
+      if post.id % 5 == 0
+        Post.title = "SPAM"
+      elsif post.id == 1
+        Post.title = "SPAM"
+      end
+    end
+  end
+
 end
