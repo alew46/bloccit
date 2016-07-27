@@ -7,6 +7,24 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
+require 'random_data'
+
+ 50.times do
+   Post.create!(
+     title:  RandomData.random_sentence,
+     body:   RandomData.random_paragraph
+   )
+ end
+
+ posts = Post.all
+
+ 100.times do
+   Comment.create!(
+     post: posts.sample,
+     body: RandomData.random_paragraph
+   )
+ end
+
 uniquepost = Post.find_or_create_by(title: "Alex's unique post", body: "This is Alex's unique post, check it out!")
 
 Comment.find_or_create_by(body: "This comment is special; it's the only one of it's kind.", post: uniquepost)
