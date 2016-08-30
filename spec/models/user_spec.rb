@@ -33,4 +33,15 @@ RSpec.describe User, type: :model do
       expect(user_with_invalid_email).to_not be_valid
     end
   end
+
+  describe "name callback" do
+    let(:name_user) { User.new(name: "steve jobs", email: "steve@apple.com") }
+
+    it { is_expected.to allow_value("Steve Jobs").for(:name) }
+
+  #   it "formats the name properly with both words capitalized" do
+  #     expect(name_user).to have_attributes(name: "Steve Jobs", email: "steve@apple.com")
+  #   end
+  end
+
 end
