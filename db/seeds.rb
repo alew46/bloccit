@@ -33,6 +33,13 @@ member = User.create!(
   password: "helloworld"
 )
 
+moderator = User.create!(
+  name: "Moderator User",
+  email: "moderator@example.com",
+  password: "helloworld",
+  role: "moderator"
+)
+
 15.times do
 
   Topic.create!(
