@@ -4,29 +4,35 @@ class CommentsController < ApplicationController
   before_action :authorize_user, only: [:destory]
 
   def create
-    @post = Post.find(params[:post_id])
-    comment = @post.comments.new(comment_params)
-    comment.user = current_user
+    if params[:post_id]
+      @parent = Post.find(params[:post_id])
+    elsif params[:topic_id]
+      @parent = Topic.find(params[:topic_id])
+    end
 
-    if comment.save
-      flash[:notice] = "Comment saved successfully."
-      redirect_to [@post.topic, @post]
-    else
-      flash[:alert] = "There was a problem saving your comment."
-      redirect_to [@post.topic, @post]
+    @comment = @parent.comments.new(comment_params)
+    @comment.user = current_user
+
+    if @comment.save
+      if @parent.is_a?(Post)
+        flash[:notice] = 'Comment saved successfully'
+        redirect_to [@parent.topic, @parent]
+      elsif @parent.is_a?(Topic)
+        flash[:notice] = 'Comment saved successfully'
+        redirect_to @parent
+      end
     end
   end
 
   def delete
-    @post = Post.find(params[:post_id])
-    comment = @post.comments.find(params[:id])
+    @comment = Comment.find(params[:id])
 
-    if comment.destroy
-      flash[:notice] = "Comment deleted successfully."
-      redirect_to [@post.topic, @post]
+    if @comment.destroy
+      flash[:notice] = "Comment successfully deleted."
+      redirect_to :back
     else
-      flash[:alert] = "There was a problem deleting the comment."
-      redirect_to [@post.topic, @post]
+      flash[:alert] = "There was a problem saving your comment."
+      redirect_to :back
     end
   end
 

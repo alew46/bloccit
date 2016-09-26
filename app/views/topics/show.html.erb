@@ -12,7 +12,20 @@
       </br>
       <%= @topic.description %>
      </p>
-     <% @topic.posts.each do |post| %>
+
+     <div>
+       <h4>Comments</h4>
+       <%= render @topic.comments %>
+     </div>
+
+     <div class="row">
+       <% if current_user %>
+         <%= render 'comments/form', comment: Comment.new, parent: @topic %>
+       <% end %>
+
+    <div>
+     <h3>Posts</h3>
+      <% @topic.posts.each do |post| %>
        <div class="media">
          <div class="media-body">
            <h4 class="media-heading">
