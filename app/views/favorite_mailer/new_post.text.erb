@@ -1,0 +1,8 @@
+New post "<%= @post.title %>" has been automatically added to your favorites.
+<%= "=" * (@post.title.length + 12) %>
+
+By: <%= @user.name %>
+
+<%= @post.body %>
+
+Visit online at: <%= topic_post_url(@post.topic, @post) %>

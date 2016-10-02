@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content = "text/html; charset=UTF-8" http-equiv="content-type" />
+  </head>
+
+  <body>
+    <h1>New post "<%= @post.title %>" added to favorites</h1>
+    <small>
+      The new post created by <%= @user.name %> has automatically been added to your favorites.
+
+      You will receive a notification when someone comments.
+    </small>
+    <p>
+      <%= @post.body %>
+    </p>
+    <p>
+      <%= link_to "View post on site", topic_post_url(@post.topic, @post) %>
+    </p>
+  </body>
+</html>
