@@ -31,4 +31,8 @@ class User < ActiveRecord::Base
       "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
     end
 
+    def no_comments_or_posts
+      posts.count == 0
+    end
+
 end

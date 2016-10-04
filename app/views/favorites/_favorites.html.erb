@@ -1,0 +1,18 @@
+<div class="media">
+  <div class="media-body">
+      <% user.favorites.each do |favorite| %>
+        <div>
+          <div class = "pull-left">
+            <%= image_tag favorite.post.user.avatar_url(20), class: "gravatar" %>
+          </div>
+
+          <div>
+            <h4>
+              <%= link_to favorite.post.title, topic_posts_url(favorite.post) %> | <small> <%= "#{favorite.post.comments.count} comments, #{favorite.post.points} points" %> </small>
+            </h4>
+          </div>
+
+
+      <% end %>
+  </div>
+</div>
