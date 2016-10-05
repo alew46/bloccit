@@ -21,12 +21,15 @@ class CommentsController < ApplicationController
     @post = Post.find(params[:post_id])
     comment = @post.comments.find(params[:id])
 
-    if comment.destroy
+    if @comment.destroy
       flash[:notice] = "Comment deleted successfully."
-      redirect_to [@post.topic, @post]
     else
       flash[:alert] = "There was a problem deleting the comment."
-      redirect_to [@post.topic, @post]
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
