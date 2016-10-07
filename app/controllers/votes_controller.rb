@@ -4,12 +4,10 @@ class VotesController < ApplicationController
 
   def up_vote
     update_vote(1)
-    redirect_to :back
   end
 
   def down_vote
     update_vote(-1)
-    redirect_to :back
   end
 
 private
@@ -22,6 +20,11 @@ private
       @vote.update_attribute(:value, vote_value)
     else
       @vote = current_user.votes.create(value: vote_value, post: @post)
+    end
+
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js { render nothing: true }
     end
 
   end
